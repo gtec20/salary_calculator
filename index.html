@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>월급 계산기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>월급 계산기</h2>
+
+<label for="hoursWorked">주당 근무 시간: </label>
+<input type="text" id="hoursWorked" placeholder="시간 입력" required>
+
+<br><br>
+
+<label for="hourlyRate">시간당 급여율: </label>
+<input type="text" id="hourlyRate" placeholder="급여율 입력" required>
+
+<br><br>
+
+<label for="isOvertime">주휴수당 지급 여부: </label>
+<input type="checkbox" id="isOvertime">
+
+<br><br>
+
+<button onclick="calculateSalary()">급여 계산</button>
+
+<br><br>
+
+<h3 id="result">계산 결과가 여기에 표시됩니다.</h3>
+
+<script>
+  function calculateSalary() {
+    // 입력 값 가져오기
+    var hoursWorked = document.getElementById('hoursWorked').value;
+    var hourlyRate = document.getElementById('hourlyRate').value;
+    var isOvertime = document.getElementById('isOvertime').checked;
+
+    // 숫자 검증
+    if (isNaN(hoursWorked) || isNaN(hourlyRate)) {
+      alert('숫자를 입력하세요.');
+      return;
+    }
+
+    // 값이 비었는지 확인
+    if (!hoursWorked || !hourlyRate) {
+      alert('모든 값을 입력하세요.');
+      return;
+    }
+
+    // 월급 계산
+    var salary = parseFloat(hoursWorked) * parseFloat(hourlyRate);
+    var overtimeBonus = 0;
+
+    // 주휴수당 추가
+    if (isOvertime && parseFloat(hoursWorked) > 40) {
+      overtimeBonus = (parseFloat(hoursWorked) - 40) * (parseFloat(hourlyRate) * 0.5);
+      salary += overtimeBonus;
+    }
+
+    // 결과 표시
+    var resultElement = document.getElementById('result');
+    resultElement.innerHTML = '총 급여: ' + salary.toFixed(2) + '원<br>';
+
+    //주휴수당
+    if (isOvertime) {
+      resultElement.innerHTML += '주휴수당: ' + overtimeBonus.toFixed(2) + '원<br>';
+      resultElement.innerHTML += '주휴수당 제외 급여: ' + (salary - overtimeBonus).toFixed(2) + "원";
+    }
+  }
+</script>
+
+</body>
+</html>

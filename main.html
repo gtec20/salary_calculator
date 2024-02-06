@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>알바 급여 계산기</title>
+    <link rel="stylesheet" href="main.css" />
+</head>
+<script>
+    let inputList = document.querySelectorAll('input');
+
+    inputList.forEach(input => {
+        input.addEventListener('change', (e) => {
+            console.log('INPUT EVENT');
+        });
+    });
+</script>
+<body>
+    <!-- 시급을 입력 받는다. -->
+    <!-- 일한 시간을 입력 받는다. -->
+    <div class="form">
+        <p>시급 : </p>
+        <input type="number" placeholder="시급을 입력해주세요." value="9860"/>
+        <p class="text">원</p>
+    </div>
+    <div class="form">
+        <p>근로시간 : </p>
+        <input type="number" placeholder="근로시간을 입력해주세요."/>
+        <p class="text">시간</p>
+    </div>
+    <p>근로수당 : <span>0</span>원</p>
+    <p>주휴수당 : <span>0</span>원</p>
+    <p>총 급여 : <span>0</span>원</p>
+
+    <!-- 주휴수당을 계산한다. -->
+    <!-- 근로시간/40 * 8 * 시급 -->
+</body>
+</html>

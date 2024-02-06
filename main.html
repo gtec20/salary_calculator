@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 총 일한 시간을 입력 받는다. -->
+    <!-- 시급을 입력받는다. -->
+    <!-- 계산한다. -->
+    <!-- 추가사항 -->
+    <!-- 15시간 이상 근무 시 주휴수당 계산 -->
+    <!-- 계산법 : 근로시간 / 40 * 8 * 시급 -->
+    <div class="form">
+        <p class="title">시급</p>
+        <input id="money" class="change" type="number" placeholder="시급을 입력해주세요." min="9860" value="9860"/>
+    </div>
+    <div class="form">
+        <p class="title">총 근무 시간</p>
+        <input id="time" class="change" type="number" placeholder="총 근무 시간을 입력해주세요." min="0"/>
+    </div>
+    <div>
+        <p>일반수당 : <span id="basic">0</span>원</p>
+        <p>주휴수당 : <span id="holi">0</span>원</p>
+        <p>이달의 급여 : <span id="result">0</span>원</p>
+    </div>
+</body>
+<style>
+    .form {
+        display: flex;
+        width: 500px;
+    }
+
+    .title {
+        width: 150px;
+    }
+
+    .change {
+        width: 300px;
+    }
+</style>
+<script>
+    document.querySelectorAll('.change').forEach(input => {
+        input.addEventListener('input', (e) => {
+            let time = document.getElementById('time').value;
+            let money = document.getElementById('money').value;
+            let result = time * money;
+
+            if(Number(time) >= 15) {
+                let holi = time / 40 * 8 * money;
+
+                document.getElementById('basic').innerHTML = result;
+                document.getElementById('holi').innerHTML = holi;
+                result += holi;
+                document.getElementById('result').innerHTML = result;
+                return;
+            }
+            document.getElementById('basic').innerHTML = result;
+            document.getElementById('holi').innerHTML = 0;
+            document.getElementById('result').innerHTML = result;
+        });
+    });
+</script>
+</html>
